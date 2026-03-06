@@ -5,44 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ameba Ownd カスタムコード集</title>
   <style>
+    /* 全体の基本設定 */
     body { font-family: "Helvetica Neue", Arial, sans-serif; line-height: 1.6; padding: 20px; max-width: 650px; margin: auto; background-color: #f8f9fa; color: #333; }
     h1 { text-align: center; color: #2c3e50; border-bottom: 3px solid #5a9a8a; padding-bottom: 10px; margin-bottom: 30px; }
+    
+    /* カード（カテゴリー）のデザインを統一 */
     .category { background: white; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); padding: 20px; margin-bottom: 25px; border: 1px solid #eef2f3; }
-    h2 { margin-top: 0; font-size: 1.2rem; color: #5a9a8a; display: flex; align-items: center; }
+    
+    /* タイトルのデザインを統一 */
+    h2 { margin-top: 0; font-size: 1.1rem; color: #5a9a8a; display: flex; align-items: center; border-bottom: 1px solid #f1f1f1; padding-bottom: 10px; margin-bottom: 10px; }
     h2::before { content: "●"; margin-right: 10px; font-size: 0.8em; }
+    
+    /* リストのデザインを統一 */
     ul { list-style: none; padding: 0; margin: 0; }
-    li { border-bottom: 1px solid #f1f1f1; }
+    li { border-bottom: 1px solid #f1f1f1; display: flex; align-items: center; justify-content: space-between; }
     li:last-child { border-bottom: none; }
-    a { display: block; padding: 12px 10px; text-decoration: none; color: #34495e; transition: 0.2s; font-weight: 500; }
+    
+    /* リンクとテキストの調整 */
+    a { flex-grow: 1; padding: 12px 10px; text-decoration: none; color: #34495e; transition: 0.2s; font-weight: 500; display: block; }
     a:hover { background-color: #f0f7f5; color: #5a9a8a; padding-left: 15px; }
-    .badge { font-size: 0.75rem; padding: 2px 8px; border-radius: 12px; margin-left: 8px; vertical-align: middle; }
+    
+    /* バッジのデザインを一括管理 */
+    .badge { font-size: 0.75rem; padding: 2px 10px; border-radius: 12px; margin-left: 8px; font-weight: bold; white-space: nowrap; }
     .bg-green { background: #e8f5e9; color: #2e7d32; }
     .bg-blue { background: #e3f2fd; color: #1565c0; }
     .bg-mix { background: #fff3e0; color: #ef6c00; }
+    .bg-red { background: #ffe4e1; color: #cd5c5c; }
+    .bg-yellow { background: #fffacd; color: #daa520; }
+    .bg-cyan { background: #e0f7fa; color: #00838f; }
   </style>
 </head>
 <body>
 
   <h1>🎨 Ameba Ownd<br>Custom Codes</h1>
 
-  <!-- カラムレイアウト カテゴリー -->
+  <!-- カラムレイアウト -->
   <div class="category">
     <h2>レイアウト (Column Layouts)</h2>
     <ul>
-      <li><a href="green.html">🟢 緑バージョン <span class="badge bg-green">基本形</span></a></li>
-      <li><a href="blue.html">🔵 青バージョン <span class="badge bg-blue">爽やか</span></a></li>
-      <li><a href="mix-side-by-side.html">🔵🟢 混合（横並び） <span class="badge bg-mix">PC推奨</span></a></li>
-      <li><a href="mix-stacked.html">🔵🟢 混合（縦積み） <span class="badge bg-mix">スマホ最適</span></a></li>
+      <li><a href="green.html">🟢 緑バージョン</a><span class="badge bg-green">基本形</span></li>
+      <li><a href="blue.html">🔵 青バージョン</a><span class="badge bg-blue">爽やか</span></li>
+      <li><a href="mix-side-by-side.html">🔵🟢 混合（横並び）</a><span class="badge bg-mix">PC推奨</span></li>
+      <li><a href="mix-stacked.html">🔵🟢 混合（縦積み）</a><span class="badge bg-mix">スマホ最適</span></li>
     </ul>
   </div>
 
- <!-- チャットカテゴリー（完成版！） -->
+  <!-- チャットカテゴリー -->
   <div class="category">
     <h2>チャットバブル (Chat Bubbles)</h2>
     <ul>
-      <li><a href="chat/male.html">👱🏻‍♂️ 男性バージョン <span class="badge bg-blue">Blue Chat</span></a></li>
-      <li><a href="chat/female.html">👱🏻‍♀️ 女性バージョン <span class="badge bg-green">Pink Chat</span></a></li>
-      <li><a href="chat/thinking.html">💭 考えごと吹き出し <span class="badge bg-mix">ポヨンと動く</span></a></li>
+      <li><a href="chat/male.html">👱🏻‍♂️ 男性バージョン</a><span class="badge bg-blue">Blue Chat</span></li>
+      <li><a href="chat/female.html">👱🏻‍♀️ 女性バージョン</a><span class="badge bg-green">Pink Chat</span></li>
+      <li><a href="chat/thinking.html">💭 考えごと吹き出し</a><span class="badge bg-mix">ポヨンと動く</span></li>
     </ul>
   </div>
 
@@ -50,46 +64,30 @@
   <div class="category">
     <h2>テーブル (Tables)</h2>
     <ul>
-      <li><a href="table/performance.html">📊 成績表 <span class="badge bg-blue">Speed Climbing</span></a></li>
-      <li><a href="table/france-areas.html">🇫🇷 フランスエリアガイド <span class="badge bg-green">Link List</span></a></li>
+      <li><a href="table/performance.html">📊 成績表</a><span class="badge bg-blue">Speed Climbing</span></li>
+      <li><a href="table/france-areas.html">🇫🇷 フランスエリアガイド</a><span class="badge bg-green">Link List</span></li>
     </ul>
   </div>
 
-  <!-- プロフィール (Profiles / Maps) -->
-<div class="section-container" style="margin-top: 40px;">
-    <h3 style="color: #558b8b; border-bottom: 2px solid #558b8b; padding-bottom: 8px; font-size: 1.2rem;">
-        ● プロフィール (Profiles / Maps)
-    </h3>
-    <ul style="list-style: none; padding-left: 10px; line-height: 2.5;">
-        <li style="border-bottom: 1px dotted #ddd; display: flex; align-items: center; justify-content: space-between;">
-            <a href="profile/climbing-map.html" style="text-decoration:none; color:inherit; flex-grow:1;">📍 フランスの岩場マップ</a>
-            <span style="background-color: #ffe4e1; color: #cd5c5c; padding: 2px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: bold;">Interactive</span>
-        </li>
-        <li style="border-bottom: 1px dotted #ddd; display: flex; align-items: center; justify-content: space-between;">
-            <a href="profile/style-bar.html" style="text-decoration:none; color:inherit; flex-grow:1;">📊 クライミングスタイル</a>
-            <span style="background-color: #fffacd; color: #daa520; padding: 2px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: bold;">Progress Bar</span>
-        </li>
-        <li style="border-bottom: 1px dotted #ddd; display: flex; align-items: center; justify-content: space-between;">
-            <a href="profile/europe-index.html" style="text-decoration:none; color:inherit; flex-grow:1;">🏷️ 欧州エリア索引</a>
-            <span style="background-color: #e0f7fa; color: #00838f; padding: 2px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: bold;">Tags</span>
-        </li>
+  <!-- プロフィール カテゴリー (NEW & Clean) -->
+  <div class="category">
+    <h2>プロフィール (Profiles / Maps)</h2>
+    <ul>
+      <li><a href="profile/climbing-map.html">📍 フランスの岩場マップ</a><span class="badge bg-red">Interactive</span></li>
+      <li><a href="profile/style-bar.html">📊 クライミングスタイル</a><span class="badge bg-yellow">Progress Bar</span></li>
+      <li><a href="profile/europe-index.html">🏷️ 欧州エリア索引</a><span class="badge bg-cyan">Tags</span></li>
     </ul>
-</div>
+  </div>
 
-<!-- ツール (Climbing Tools) -->
-<div class="section-container" style="margin-top: 40px;">
-    <h3 style="color: #558b8b; border-bottom: 2px solid #558b8b; padding-bottom: 8px; font-size: 1.2rem;">
-        ● ツール (Climbing Tools)
-    </h3>
-    <ul style="list-style: none; padding-left: 10px; line-height: 2.5;">
-        <li style="border-bottom: 1px dotted #ddd; display: flex; align-items: center; justify-content: space-between;">
-            <a href="tools/grade-converter.html" style="text-decoration:none; color:inherit; flex-grow:1;">🧗 グレード変換ツール</a>
-            <span style="background-color: #e8f5e9; color: #2e7d32; padding: 2px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: bold;">Converter</span>
-        </li>
+  <!-- ツール カテゴリー (NEW & Clean) -->
+  <div class="category">
+    <h2>ツール (Climbing Tools)</h2>
+    <ul>
+      <li><a href="tools/grade-converter.html">🧗 グレード変換ツール</a><span class="badge bg-green">Converter</span></li>
     </ul>
-</div>
+  </div>
 
-  <footer style="text-align: center; font-size: 0.8rem; color: #95a5a6; margin-top: 40px;">
+  <footer style="text-align: center; font-size: 0.8rem; color: #95a5a6; margin-top: 40px; padding-bottom: 20px;">
     &copy; tortoisebleu | GitHub Pages Project
   </footer>
 
