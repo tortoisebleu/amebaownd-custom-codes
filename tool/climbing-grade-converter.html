@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Climbing Grade Converter</title>
+<style type="text/css">
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    background-color: #f0f8ff; 
+    padding: 10px;
+    margin: 0;
+    transition: background-color 0.5s;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    max-width: 500px;
+    margin: 20px auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    box-sizing: border-box;
+}
+
+h1 {
+    color: #4682b4;
+    font-size: 24px;
+    margin-bottom: 5px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.mode-selector {
+    display: flex;
+    gap: 8px;
+    margin: 20px 0;
+    justify-content: center;
+}
+
+.mode-btn {
+    flex: 1;
+    padding: 12px 5px;
+    border: 2px solid #4682b4;
+    border-radius: 25px;
+    background-color: white;
+    color: #4682b4;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: inherit;
+    transition: all 0.3s;
+    outline: none;
+    font-size: 14px;
+}
+
+/* Mode Styles */
+body.mode-bouldering { background-color: #fdf5e6; }
+body.mode-bouldering h1 { color: #ff6347; }
+body.mode-bouldering .mode-btn { border-color: #ff6347; color: #ff6347; }
+body.mode-bouldering .mode-btn.active { background-color: #ff6347; color: white; }
+body.mode-bouldering select, body.mode-bouldering button#convertBtn { border-color: #ff6347; color: #ff6347; }
+body.mode-bouldering button#convertBtn { background-color: #ff6347; color: white; }
+body.mode-bouldering label { color: #ff6347; }
+
+body.mode-lead { background-color: #f0f8ff; }
+body.mode-lead h1 { color: #4682b4; }
+body.mode-lead .mode-btn { border-color: #4682b4; color: #4682b4; }
+body.mode-lead .mode-btn.active { background-color: #4682b4; color: white; }
+body.mode-lead select, body.mode-lead button#convertBtn { border-color: #4682b4; color: #4682b4; }
+body.mode-lead button#convertBtn { background-color: #4682b4; color: white; }
+body.mode-lead label { color: #4682b4; }
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+select, button#convertBtn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 8px;
+    border-radius: 12px;
+    border: 2px solid;
+    background-color: #ffffff;
+    font-size: 16px;
+    font-family: inherit;
+    box-sizing: border-box;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px top 50%;
+    background-size: 12px auto;
+}
+
+button#convertBtn {
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 25px;
+    font-weight: bold;
+    font-size: 18px;
+    background-image: none;
+}
+
+button#convertBtn:active {
+    transform: scale(0.98);
+}
+
+.result-container {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 30px;
+    padding: 0;
+    width: 100%;
+}
+
+.avatar-wrapper {
+    text-align: center;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: solid 2px #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.avatar-name {
+    display: block;
+    font-size: 10px;
+    color: #888;
+    margin-top: 4px;
+    font-weight: bold;
+}
+
+.result {
+    position: relative;
+    padding: 15px;
+    border-radius: 15px;
+    background: #ffffff;
+    border: 2px solid #ddd;
+    color: #333;
+    line-height: 1.6;
+    font-size: 15px;
+    flex-grow: 1;
+    word-break: break-word; 
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
+}
+
+.result::before {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: -10px;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-right: 10px solid #ffffff;
+    z-index: 2;
+}
+
+.result::after {
+    content: "";
+    position: absolute;
+    top: 14px;
+    left: -13px;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 12px solid #ddd;
+    z-index: 1;
+}
+
+.highlight {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+@media (max-width: 400px) {
+    .container {
+        padding: 15px;
+        margin: 10px auto;
+    }
+    h1 {
+        font-size: 20px;
+    }
+    .result {
+        font-size: 14px;
+    }
+}
+
+</style>
+</head>
+
+<body class="mode-lead">
+<div class="container">
+    <h1 id="mainTitle">Climbing Grade Converter</h1>
+    
+    <div class="mode-selector">
+        <button id="modeLead" class="mode-btn active" onclick="setMode('lead')">Lead Climbing</button>
+        <button id="modeBouldering" class="mode-btn" onclick="setMode('bouldering')">Bouldering</button>
+    </div>
+    
+    <label for="context">1. Select Standard:</label>
+    <select id="context"></select>
+    
+    <label for="inputGrade">2. Your Grade:</label>
+    <select id="inputGrade"></select>
+    
+    <button id="convertBtn">CONVERSION</button>
+    
+    <div id="resultContainer" class="result-container" style="display:none;">
+        <div class="avatar-wrapper">
+            <img src="https://cdn.amebaowndme.com/madrid-prd/madrid-web/images/sites/499076/8ed7bbd61b78348fa635ba325a401c98_8e6ecd7366534889afd88c6472797869.png" alt="Catherine" class="avatar">
+            <span class="avatar-name">Catherine</span>
+        </div>
+        <div id="result" class="result"></div>
+    </div>
+</div>
+
+<script>
+// --- Data Structure with Explicit Orders ---
+const allData = {
+    bouldering: {
+        systems: [
+            { id: 'japan', label: 'Japan (kyū/dan)' },
+            { id: 'usa', label: 'USA (V-Grade)' },
+            { id: 'french', label: 'French' }
+        ],
+        data: {
+            japan: {
+                "6級(kyū)":  { usa: "V0- ~ V0",   french: "3+ ~ 4" },
+                "5級(kyū)":  { usa: "V0+ ~ V1",   french: "4+ ~ 5" },
+                "4級(kyū)":  { usa: "V2 ~ V3",    french: "5+ ~ 6a" },
+                "3級(kyū)":  { usa: "V3 ~ V4",    french: "6a+ ~ 6b" },
+                "2級(kyū)":  { usa: "V4 ~ V5",    french: "6b+ ~ 6c" },
+                "1級(kyū)":  { usa: "V5 ~ V6",    french: "6c+ ~ 7a" },
+                "初段(dan)": { usa: "V7",          french: "7a+ ~ 7b" },
+                "2段(dan)":  { usa: "V8 ~ V9",    french: "7b+ ~ 7c" },
+                "3段(dan)":  { usa: "V10 ~ V11",  french: "7c+ ~ 8a" },
+                "4段(dan)":  { usa: "V12 ~ V13",  french: "8a+ ~ 8b" },
+                "5段(dan)":  { usa: "V14 ~ V15",  french: "8b+ ~ 8c" },
+                "6段(dan)":  { usa: "V16 ~ V17",  french: "8c+ ~ 9a" }
+            },
+            usa: {
+                "V0-": { japan: "6級", french: "3+" }, "V0":  { japan: "6級", french: "4" }, "V0+": { japan: "5級", french: "4+" },
+                "V1":  { japan: "5級", french: "5" }, "V2":  { japan: "4級", french: "5+" }, "V3":  { japan: "4~3級", french: "6a ~ 6a+" },
+                "V4":  { japan: "3~2級", french: "6b ~ 6b+" }, "V5":  { japan: "2~1級", french: "6c ~ 6c+" }, "V6":  { japan: "1級", french: "7a" },
+                "V7":  { japan: "初段", french: "7a+" }, "V8":  { japan: "初~2段", french: "7b ~ 7b+" }, "V9":  { japan: "2段", french: "7c" },
+                "V10": { japan: "3段", french: "7c+" }, "V11": { japan: "3段", french: "8a" }, "V12": { japan: "4段", french: "8a+" },
+                "V13": { japan: "4段", french: "8b" }, "V14": { japan: "5段", french: "8b+" }, "V15": { japan: "5段", french: "8c" },
+                "V16": { japan: "6段", french: "8c+" }, "V17": { japan: "6段", french: "9a" }
+            },
+            french: {
+                "3+":  { japan: "6級", usa: "V0-" }, "4":   { japan: "6級", usa: "V0" }, "4+":  { japan: "5級", usa: "V0+" },
+                "5":   { japan: "5級", usa: "V1" }, "5+":  { japan: "4級", usa: "V2" }, "6a":  { japan: "4級", usa: "V2~V3" },
+                "6a+": { japan: "3級", usa: "V3" }, "6b":  { japan: "3級", usa: "V3~V4" }, "6b+": { japan: "2級", usa: "V4" },
+                "6c":  { japan: "2級", usa: "V4~V5" }, "6c+": { japan: "1級", usa: "V5~V6" }, "7a":  { japan: "1級", usa: "V6" },
+                "7a+": { japan: "初段", usa: "V7" }, "7b":  { japan: "初段", usa: "V7~V8" }, "7b+": { japan: "2段", usa: "V8~V9" },
+                "7c":  { japan: "2段", usa: "V9" }, "7c+": { japan: "3段", usa: "V10" }, "8a":  { japan: "3段", usa: "V11" },
+                "8a+": { japan: "4段", usa: "V12" }, "8b":  { japan: "4段", usa: "V13" }, "8b+": { japan: "5段", usa: "V14" },
+                "8c":  { japan: "5段", usa: "V15" }, "8c+": { japan: "6段", usa: "V16" }, "9a":  { japan: "6段", usa: "V17" }
+            }
+        },
+        // Explicit Display Orders
+        orders: {
+            japan: ["6級(kyū)", "5級(kyū)", "4級(kyū)", "3級(kyū)", "2級(kyū)", "1級(kyū)", "初段(dan)", "2段(dan)", "3段(dan)", "4段(dan)", "5段(dan)", "6段(dan)"],
+            usa: ["V0-", "V0", "V0+", "V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12", "V13", "V14", "V15", "V16", "V17"],
+            french: ["3+", "4", "4+", "5", "5+", "6a", "6a+", "6b", "6b+", "6c", "6c+", "7a", "7a+", "7b", "7b+", "7c", "7c+", "8a", "8a+", "8b", "8b+", "8c", "8c+", "9a"]
+        }
+    },
+    lead: {
+        systems: [
+            { id: 'french_lead', label: 'French' },
+            { id: 'usa_lead', label: 'USA (YDS)' },
+            { id: 'uiaa', label: 'UIAA' }
+        ],
+        data: {
+            french_lead: {
+                "5c": { uiaa: "V+ ~ VI-", usa: "5.8 ~ 5.9" }, "6a": { uiaa: "VI- ~ VI", usa: "5.9 ~ 5.10a" }, "6a+": { uiaa: "VI+", usa: "5.10a ~ 5.10b" },
+                "6b": { uiaa: "VII-", usa: "5.10b ~ 5.10c" }, "6b+": { uiaa: "VII ~ VII+", usa: "5.10d ~ 5.11a" }, "6c": { uiaa: "VII+", usa: "5.11a ~ 5.11b" },
+                "6c+": { uiaa: "VIII-", usa: "5.11b ~ 5.11c" }, "7a": { uiaa: "VIII- ~ VIII", usa: "5.11c ~ 5.11d" }, "7a+": { uiaa: "VIII", usa: "5.11d ~ 5.12a" },
+                "7b": { uiaa: "VIII ~ VIII+", usa: "5.12a ~ 5.12b" }, "7b+": { uiaa: "VIII+ ~ IX-", usa: "5.12b ~ 5.12c" }, "7c": { uiaa: "IX- ~ IX", usa: "5.12c ~ 5.12d" },
+                "7c+": { uiaa: "IX ~ IX+", usa: "5.12d ~ 5.13a" }, "8a": { uiaa: "IX+ ~ X-", usa: "5.13b" }, "8a+": { uiaa: "X- ~ X", usa: "5.13c" },
+                "8b": { uiaa: "X", usa: "5.13d" }, "8b+": { uiaa: "X+", usa: "5.14a" }, "8c": { uiaa: "X+ ~ XI-", usa: "5.14b" },
+                "8c+": { uiaa: "XI- ~ XI", usa: "5.14c" }, "9a": { uiaa: "XI", usa: "5.14d" }, "9a+": { uiaa: "XI ~ XI+", usa: "5.15a" },
+                "9b": { uiaa: "XI+", usa: "5.15b" }, "9b+": { uiaa: "XI+ ~ XII-", usa: "5.15c" }, "9c": { uiaa: "XII-", usa: "5.15d" }
+            },
+            usa_lead: {
+                "5.6": { french: "4 ~ 5a", uiaa: "V-" }, "5.7": { french: "5a ~ 5b", uiaa: "V" }, "5.8": { french: "5b ~ 5c", uiaa: "V+" },
+                "5.9": { french: "5c ~ 6a", uiaa: "VI-" }, "5.10a": { french: "6a ~ 6a+", uiaa: "VI" }, "5.10b": { french: "6a+ ~ 6b", uiaa: "VI+" },
+                "5.10c": { french: "6b", uiaa: "VII-" }, "5.10d": { french: "6b ~ 6b+", uiaa: "VII" }, "5.11a": { french: "6b+ ~ 6c", uiaa: "VII ~ VII+" },
+                "5.11b": { french: "6c ~ 6c+", uiaa: "VII+ ~ VIII-" }, "5.11c": { french: "6c+ ~ 7a", uiaa: "VIII-" }, "5.11d": { french: "7a ~ 7a+", uiaa: "VIII- ~ VIII" },
+                "5.12a": { french: "7a+ ~ 7b", uiaa: "VIII" }, "5.12b": { french: "7b ~ 7b+", uiaa: "VIII+" }, "5.12c": { french: "7b+ ~ 7c", uiaa: "IX-" },
+                "5.12d": { french: "7c ~ 7c+", uiaa: "IX" }, "5.13a": { french: "7c+", uiaa: "IX ~ IX+" }, "5.13b": { french: "8a", uiaa: "IX+ ~ X-" },
+                "5.13c": { french: "8a+", uiaa: "X-" }, "5.13d": { french: "8b", uiaa: "X" }, "5.14a": { french: "8b+", uiaa: "X+" },
+                "5.14b": { french: "8c", uiaa: "X+ ~ XI-" }, "5.14c": { french: "8c+", uiaa: "XI- ~ XI" }, "5.14d": { french: "9a", uiaa: "XI" },
+                "5.15a": { french: "9a+", uiaa: "XI ~ XI+" }, "5.15b": { french: "9b", uiaa: "XI+ ~ XII-" }, "5.15c": { french: "9b+", uiaa: "XII- ~ XII" },
+                "5.15d": { french: "9c", uiaa: "XII+" }
+            },
+            uiaa: {
+                "V-": { french: "4 ~ 5a", usa: "5.6" }, "V": { french: "5a ~ 5b", usa: "5.7" }, "V+": { french: "5b ~ 5c", usa: "5.8" },
+                "VI-": { french: "5c ~ 6a", usa: "5.9" }, "VI": { french: "6a ~ 6a+", usa: "5.10a" }, "VI+": { french: "6a+ ~ 6b", usa: "5.10b" },
+                "VII-": { french: "6b", usa: "5.10c" }, "VII": { french: "6b ~ 6b+", usa: "5.10d" }, "VII+": { french: "6c", usa: "5.11a ~ 5.11b" },
+                "VIII-": { french: "6c+ ~ 7a", usa: "5.11b ~ 5.11d" }, "VIII": { french: "7a+", usa: "5.11d ~ 5.12a" }, "VIII+": { french: "7b ~ 7b+", usa: "5.12b" },
+                "IX-": { french: "7b+ ~ 7c", usa: "5.12c" }, "IX": { french: "7c ~ 7c+", usa: "5.12d" }, "IX+": { french: "7c+ ~ 8a", usa: "5.13a ~ 5.13b" },
+                "X-": { french: "8a ~ 8a+", usa: "5.13b ~ 5.13c" }, "X": { french: "8a+ ~ 8b", usa: "5.13d" }, "X+": { french: "8b+", usa: "5.14a" },
+                "XI-": { french: "8c ~ 8c+", usa: "5.14b ~ 5.14c" }, "XI": { french: "8c+ ~ 9a", usa: "5.14c ~ 5.14d" }, "XI+": { french: "9a ~ 9a+", usa: "5.14d ~ 5.15a" },
+                "XII-": { french: "9a+ ~ 9b", usa: "5.15a ~ 5.15b" }, "XII": { french: "9b ~ 9b+", usa: "5.15b ~ 5.15c" }, "XII+": { french: "9b+ ~ 9c", usa: "5.15c ~ 5.15d" }
+            }
+        },
+        // Explicit Display Orders
+        orders: {
+            french_lead: ["5c", "6a", "6a+", "6b", "6b+", "6c", "6c+", "7a", "7a+", "7b", "7b+", "7c", "7c+", "8a", "8a+", "8b", "8b+", "8c", "8c+", "9a", "9a+", "9b", "9b+", "9c"],
+            usa_lead: ["5.6", "5.7", "5.8", "5.9", "5.10a", "5.10b", "5.10c", "5.10d", "5.11a", "5.11b", "5.11c", "5.11d", "5.12a", "5.12b", "5.12c", "5.12d", "5.13a", "5.13b", "5.13c", "5.13d", "5.14a", "5.14b", "5.14c", "5.14d", "5.15a", "5.15b", "5.15c", "5.15d"],
+            uiaa: ["V-", "V", "V+", "VI-", "VI", "VI+", "VII-", "VII", "VII+", "VIII-", "VIII", "VIII+", "IX-", "IX", "IX+", "X-", "X", "X+", "XI-", "XI", "XI+", "XII-", "XII", "XII+"]
+        }
+    }
+};
+
+let currentMode = 'lead';
+const encouragementMessages = ["Courage! 💪🏻", "Keep Pushing! 💪🏻", "Allez! 💪🏻", "Ganba! 💪🏻", "Stay Strong! 💪🏻"];
+
+function setMode(mode) {
+    currentMode = mode;
+    document.body.className = (mode === 'lead') ? 'mode-lead' : 'mode-bouldering';
+    document.getElementById('modeLead').classList.toggle('active', mode === 'lead');
+    document.getElementById('modeBouldering').classList.toggle('active', mode === 'bouldering');
+    
+    const contextSelect = document.getElementById('context');
+    const systems = allData[mode].systems;
+    contextSelect.innerHTML = systems.map(s => `<option value="${s.id}">${s.label}</option>`).join('');
+    
+    updateGradeOptions();
+}
+
+function updateGradeOptions() {
+    const contextSelect = document.getElementById('context');
+    const gradeSelect = document.getElementById('inputGrade');
+    const systemId = contextSelect.value;
+    
+    // Use the explicit orders defined in the data structure
+    const grades = allData[currentMode].orders[systemId];
+
+    gradeSelect.innerHTML = grades.map(g => `<option value="${g}">${g}</option>`).join('');
+    document.getElementById('resultContainer').style.display = 'none';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const contextSelect = document.getElementById('context');
+    const convertBtn = document.getElementById('convertBtn');
+    
+    contextSelect.addEventListener('change', updateGradeOptions);
+    
+    convertBtn.addEventListener('click', () => {
+        const systemId = contextSelect.value;
+        const gradeId = document.getElementById('inputGrade').value;
+        const data = allData[currentMode].data[systemId][gradeId];
+        const encouragement = encouragementMessages[Math.floor(Math.random() * encouragementMessages.length)];
+        
+        const accent = (currentMode === 'lead') ? '#4682b4' : '#ff6347';
+        let resultHTML = `<span class="highlight" style="color:${accent}">${gradeId}</span> is approximately:<br>`;
+        
+        if (currentMode === 'bouldering') {
+            if (systemId === 'japan') {
+                resultHTML += `🇺🇸 USA: <b>${data.usa}</b><br>🇫🇷 French: <b>${data.french}</b>`;
+            } else if (systemId === 'usa') {
+                resultHTML += `🇯🇵 Japan: <b>${data.japan}</b><br>🇫🇷 French: <b>${data.french}</b>`;
+            } else {
+                resultHTML += `🇯🇵 Japan: <b>${data.japan}</b><br>🇺🇸 USA: <b>${data.usa}</b>`;
+            }
+        } else {
+            if (systemId === 'french_lead') {
+                resultHTML += `🇺🇸 USA: <b>${data.usa}</b><br>⛰️ UIAA: <b>${data.uiaa}</b>`;
+            } else if (systemId === 'usa_lead') {
+                resultHTML += `🇫🇷 French: <b>${data.french}</b><br>⛰️ UIAA: <b>${data.uiaa}</b>`;
+            } else {
+                resultHTML += `🇫🇷 French: <b>${data.french}</b><br>🇺🇸 USA: <b>${data.usa}</b>`;
+            }
+        }
+        
+        resultHTML += `<br><br><small>« ${encouragement} »</small>`;
+        document.getElementById('result').innerHTML = resultHTML;
+        document.getElementById('resultContainer').style.display = 'flex';
+    });
+
+    setMode('lead');
+});
+</script>
+</body>
+</html>
