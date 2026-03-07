@@ -5,27 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ameba Ownd カスタムコード集</title>
   <style>
-    /* 全体の基本設定 */
     body { font-family: "Helvetica Neue", Arial, sans-serif; line-height: 1.6; padding: 20px; max-width: 650px; margin: auto; background-color: #f8f9fa; color: #333; }
     h1 { text-align: center; color: #2c3e50; border-bottom: 3px solid #5a9a8a; padding-bottom: 10px; margin-bottom: 30px; }
-    
-    /* カード（カテゴリー）のデザインを統一 */
     .category { background: white; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); padding: 20px; margin-bottom: 25px; border: 1px solid #eef2f3; }
-    
-    /* タイトルのデザインを統一 */
     h2 { margin-top: 0; font-size: 1.1rem; color: #5a9a8a; display: flex; align-items: center; border-bottom: 1px solid #f1f1f1; padding-bottom: 10px; margin-bottom: 10px; }
     h2::before { content: "●"; margin-right: 10px; font-size: 0.8em; }
-    
-    /* リストのデザインを統一 */
     ul { list-style: none; padding: 0; margin: 0; }
     li { border-bottom: 1px solid #f1f1f1; display: flex; align-items: center; justify-content: space-between; }
     li:last-child { border-bottom: none; }
-    
-    /* リンクとテキストの調整 */
     a { flex-grow: 1; padding: 12px 10px; text-decoration: none; color: #34495e; transition: 0.2s; font-weight: 500; display: block; }
     a:hover { background-color: #f0f7f5; color: #5a9a8a; padding-left: 15px; }
-    
-    /* バッジのデザインを一括管理 */
     .badge { font-size: 0.75rem; padding: 2px 10px; border-radius: 12px; margin-left: 8px; font-weight: bold; white-space: nowrap; }
     .bg-green { background: #e8f5e9; color: #2e7d32; }
     .bg-blue { background: #e3f2fd; color: #1565c0; }
@@ -39,7 +28,7 @@
 
   <h1>🎨 Ameba Ownd<br>Custom Codes</h1>
 
-  <!-- カラムレイアウト -->
+  <!-- レイアウト -->
   <div class="category">
     <h2>レイアウト (Column Layouts)</h2>
     <ul>
@@ -50,7 +39,7 @@
     </ul>
   </div>
 
-  <!-- チャットカテゴリー -->
+  <!-- チャット -->
   <div class="category">
     <h2>チャットバブル (Chat Bubbles)</h2>
     <ul>
@@ -60,16 +49,25 @@
     </ul>
   </div>
 
-  <!-- テーブル カテゴリー -->
+  <!-- スライドショー (NEW!) -->
   <div class="category">
-    <h2>テーブル (Tables)</h2>
+    <h2>スライドショー (Slideshows)</h2>
     <ul>
-      <li><a href="table/performance.html">📊 成績表</a><span class="badge bg-blue">Speed Climbing</span></li>
-      <li><a href="table/france-areas.html">🇫🇷 フランスエリアガイド</a><span class="badge bg-green">Link List</span></li>
+      <li><a href="slideshow/fast-slide-18s.html">🎞️ 早送りスライド (18秒)</a><span class="badge bg-blue">Quick</span></li>
+      <li><a href="slideshow/cross-dissolve-40s.html">🎬 クロスディゾルブ (40秒)</a><span class="badge bg-green">Smooth</span></li>
     </ul>
   </div>
 
-  <!-- プロフィール カテゴリー (NEW & Clean) -->
+  <!-- テーブル -->
+  <div class="category">
+    <h2>テーブル (Tables)</h2>
+    <ul>
+      <li><a href="performance.html">📊 成績表</a><span class="badge bg-blue">Speed Climbing</span></li>
+      <li><a href="france-areas.html">🇫🇷 フランスエリアガイド</a><span class="badge bg-green">Link List</span></li>
+    </ul>
+  </div>
+
+  <!-- プロフィール -->
   <div class="category">
     <h2>プロフィール (Profiles / Maps)</h2>
     <ul>
@@ -79,7 +77,7 @@
     </ul>
   </div>
 
-  <!-- ツール カテゴリー (NEW & Clean) -->
+  <!-- ツール -->
   <div class="category">
     <h2>ツール (Climbing Tools)</h2>
     <ul>
