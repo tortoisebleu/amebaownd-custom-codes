@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>France Climbing Map</title>
+  
+  <style>
+
+        .climbing-map-root {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 40px auto;
+            background: #0f172a; 
+            font-family: 'Hiragino Mincho ProN', 'serif';
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .map-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 3; 
+            background-image: url('map-bg-chamonix.jpg'); 
+            background-size: cover;
+            background-position: center;
+        }
+
+        .pins-layer {
+            position: absolute;
+            inset: 0;
+            left: -3%; 
+            top: -3%;
+            z-index: 10;
+        }
+
+        .map-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(15,23,42,0.1) 0%, transparent 50%, rgba(15,23,42,0.4) 100%);
+            pointer-events: none;
+        }
+
+        .map-pin {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            z-index: 10;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+      
+        .map-pin:has(.label-sync-pulse) {
+            z-index: 100;
+        }
+
+        .pin-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #fff, 0 0 30px #3b82f6;
+            z-index: 2;
+        }
+
+        .pin-pulse {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            animation: ripple-sync 3s infinite;
+            z-index: 1;
+            pointer-events: none; 
+        }
+
+        @keyframes ripple-sync {
+            0% { transform: scale(0.3); opacity: 1; }
+            100% { transform: scale(3.5); opacity: 0; }
+        }
+
+        .pin-label {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(4px);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: bold;
+            color: #1e293b;
+            white-space: nowrap;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border: 1px solid #e2e8f0;
+            pointer-events: auto; 
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .label-sync-pulse {
+            animation: label-crystallize-sync 3s infinite;
+        }
+
+        @keyframes label-crystallize-sync {
+            0% { opacity: 0; transform: translateX(-50%) scale(0.3); filter: blur(15px); }
+            40% { opacity: 1; transform: translateX(-50%) scale(1); filter: blur(0); }
+            70% { opacity: 1; transform: translateX(-50%) scale(1); filter: blur(0); }
+            100% { opacity: 0; transform: translateX(-50%) scale(1.1); filter: blur(4px); }
+        }
+
+        .map-pin:hover .pin-label {
+            animation: none !important;
+            opacity: 1 !important;
+            transform: translateX(-50%) scale(1.1) !important;
+            filter: blur(0) !important;
+            background: #fff;
+            z-index: 100;
+        }
+
+        /* 座標設定 */
+        .pos-fontainebleau { top: 18%; left: 51%; }
+        .pos-vosge { top: 12%; left: 78%; }
+        .pos-chamonix { top: 42%; left: 81%; }
+        .pos-ceuse { top: 66%; left: 72%; }
+        .pos-calanques { top: 81%; left: 67%; }
+        .pos-jura { top: 34%; left: 74%; }
+        .pos-chambery { top: 46%; left: 73%; }
+        .pos-maurienne { top: 51%; left: 79%; }
+        .pos-ecrins { top: 56%; left: 76%; }
+        .pos-briancon { top: 60%; left: 80%; }
+        .pos-tour-termier { top: 57.5%; left: 79.5%; }
+        .pos-presles { top: 55%; left: 68%; }
+        .pos-verdon { top: 74%; left: 75%; }
+
+        /* ラベル位置調整 */
+        .label-bottom { top: 25px; left: 50%; }
+        .label-top { bottom: 25px; left: 50%; }
+        .label-right { left: 25px; top: 50%; transform: translateY(-50%) !important; }
+
+        @media (max-width: 640px) {
+            .pin-label { font-size: 10px; padding: 3px 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="climbing-map-root">
+        <div class="map-wrapper">
+            <div class="map-overlay"></div>
+            
+            <div class="pins-layer">
+                <a href="https://escalade.amebaownd.com/posts/8133128" class="map-pin pos-fontainebleau" aria-label="Fontainebleau（フォンテーヌブロー）の詳細を見る">
+                    <div class="pin-dot"></div><div class="pin-pulse"></div>
+                    <span class="pin-label label-bottom label-sync-pulse">Fontainebleau</span>
+                </a>
+                <a href="https://escalade.amebaownd.com/posts/10304073" class="map-pin pos-vosge" aria-label="Des Vosges（ヴォージュ）の詳細を見る">
+                    <div class="pin-dot"></div><div class="pin-pulse"></div>
+                    <span class="pin-label label-bottom label-sync-pulse">Des Vosges</span>
+                </a>
+                <a href="https://escalade.amebaownd.com/posts/37801717" class="map-pin pos-chamonix" aria-label="Chamonix Mont Blanc（シャモニ）の詳細を見る">
+                    <div class="pin-dot"></div><div class="pin-pulse"></div>
+                    <span class="pin-label label-top label-sync-pulse">Chamonix Mont Blanc</span>
+                </a>
+                <a href="https://escalade.amebaownd.com/posts/57035858" class="map-pin pos-ceuse" aria-label="Céüse（セユーズ）の詳細を見る">
+                    <div class="pin-dot"></div><div class="pin-pulse"></div>
+                    <span class="pin-label label-bottom label-sync-pulse">Céüse</span>
+                </a>
+                <a href="https://escalade.amebaownd.com/posts/8112235" class="map-pin pos-calanques" aria-label="Les Calanques（カランク）の詳細を見る">
+                    <div class="pin-dot"></div><div class="pin-pulse"></div>
+                    <span class="pin-label label-bottom label-sync-pulse">Les Calanques</span>
+                </a>
+
+                <a href="https://escalade.amebaownd.com/posts/5012176" class="map-pin pos-jura" aria-label="Massif du Jura（ジュラ）の詳細を見る">
+                    <div class="pin-dot"></div><div class="pin-pulse"></div>
+                    <span class="pin-label label-bottom">Massif du Jura</span>
+                </a>
+                <a href="https://escalade.amebaownd.com/posts/54936014" class="map-pin pos-chambery" aria-label="Chambéry & Annecy（シャンベリ＆アヌシー）の詳細を見る">
+                    <div class="pin-dot"></div><div class="pin-pulse"></div>
+                    <span class="pin-label label-top">Chambéry & Annecy</span>
+                </a>
+                <a href="https://escalade.amebaownd.com/posts/35261394" class="map-pin pos-maurienne" aria-label="Maurienne（モーリエンヌ）の詳細を見る">
+                    <div class="pin-dot"></div><div class="pin-pulse"></div>
+                    <span class="pin-label label-right">Maurienne</span>
+                </a>
+                <a href="https://escalade.amebaownd.com/posts/36692932" class="map-pin pos-ecrins" aria-label="Massif des Écrins（エトラン）の詳細を見る">
+                    <div class="pin-dot"></div><div class="pin-pulse"></div>
+                    <span class="pin-label label-top">Massif des Écrins</span>
+                </a>
+                <a href="https://escalade.amebaownd.com/posts/9751179" class="map-pin pos-briancon" aria-label="Briançon & AILEFROIDE（ブリアンソン＆エルフロイド）の詳細を見る">
+                    <div class="pin-dot"></div><div class="pin-pulse"></div>
+                    <span class="pin-label label-bottom">Briançon & AILEFROIDE</span>
+                </a>
+                <a href="https://escalade.amebaownd.com/posts/35224257" class="map-pin pos-tour-termier" aria-label="Tour Termier（トゥール・テルミエ）の詳細を見る">
+                    <div class="pin-dot"></div><div class="pin-pulse"></div>
+                    <span class="pin-label label-right">Tour Termier</span>
+                </a>
+                <a href="https://escalade.amebaownd.com/posts/23438661" class="map-pin pos-presles" aria-label="Falaises De Presles（プレル）の詳細を見る">
+                    <div class="pin-dot"></div><div class="pin-pulse"></div>
+                    <span class="pin-label label-bottom">Falaises De Presles</span>
+                </a>
+                <a href="https://escalade.amebaownd.com/posts/22064263" class="map-pin pos-verdon" aria-label="Gorges du Verdon（ヴェルドン）の詳細を見る">
+                    <div class="pin-dot"></div><div class="pin-pulse"></div>
+                    <span class="pin-label label-bottom">Gorges du Verdon</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
