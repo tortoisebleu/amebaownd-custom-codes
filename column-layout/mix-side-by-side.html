@@ -20,12 +20,6 @@
       gap: 15px;
     }
 
-    /* ===== Wrapper 直下の div（height: 100% を機能させるため） ===== */
-    .area-grid-wrapper > div {
-      display: flex;
-      flex-direction: column;
-    }
-
     /* ===== Country tag ===== */
     .country-tag {
       font-size: 1.1em;
@@ -70,7 +64,7 @@
     .area-img {
       width: 100px;
       min-width: 100px;
-      height: 100%;
+       height: auto;  /* ← 100px から変更 */
       object-fit: cover;
       display: block;
       align-self: stretch;
