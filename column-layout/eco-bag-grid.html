@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Bag Collections</title>
+    <style>
+        body {
+            background-color: #f1f5f9; /* 背景を少しグレーにしてカードを際立たせる */
+            margin: 0;
+            padding: 20px;
+        }
+
+        .mp-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            max-width: 860px;
+            margin: 60px auto; /* 60pxの上下余白と中央寄せ */
+            font-family: Georgia, 'Noto Serif JP', serif;
+        }
+        
+        /* --- 以下、あなたの素敵なデザインを継承 --- */
+        .mp-card {
+            display: block;
+            text-decoration: none;
+            background: #f0f7f5;
+            border: 1px solid #a8c4bc;
+            border-top: 3px solid #6a9e94;
+            color: #2e4a45;
+            transition: transform 0.25s, box-shadow 0.25s;
+            overflow: hidden;
+        }
+        .mp-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(100,160,148,0.22);
+        }
+        .mp-img-wrap { position: relative; }
+        .mp-thumb {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            display: block;
+            background: #bed3ca;
+        }
+        .mp-new {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #6a9e94;
+            color: #2e4a45;
+            font-size: 0.68rem;
+            font-family: Georgia, serif;
+            font-style: italic;
+            letter-spacing: 0.18em;
+            padding: 4px 10px;
+            animation: mp-pulse 2.2s ease-in-out infinite;
+        }
+        @keyframes mp-pulse {
+            0%, 100% { background: #6a9e94; color: #2e4a45; }
+            50% { background: #2e4a45; color: #d4ede8; }
+        }
+        .mp-body { padding: 12px 14px 14px; }
+        .mp-year {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #3d7068;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+        }
+        .mp-desc {
+            font-size: 0.78rem;
+            line-height: 1.65;
+            color: #4a6a65;
+        }
+        .mp-link {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 0.75rem;
+            color: #6a9e94;
+            letter-spacing: 0.06em;
+        }
+        @media (max-width: 680px) { .mp-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 420px) { .mp-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="mp-grid">
+    <!-- 2025 -->
+    <a class="mp-card" href="https://escalade.amebaownd.com/posts/58574182">
+        <div class="mp-img-wrap">
+            <img class="mp-thumb" src="https://cdn.amebaowndme.com/madrid-prd/madrid-web/images/sites/499076/d370510303083fbb9e328975fee192da_f9e1be8403bdb7513619872dfca0a114.jpg?width=600" alt="2025">
+            <span class="mp-new">Nouveau</span>
+        </div>
+        <div class="mp-body">
+            <div class="mp-year">2025</div>
+            <div class="mp-desc">2025年コレクション</div>
+            <span class="mp-link">→ 記事を読む</span>
+        </div>
+    </a>
+
+    <!-- 2024 -->
+    <a class="mp-card" href="https://escalade.amebaownd.com/posts/56342481">
+        <div class="mp-img-wrap">
+            <img class="mp-thumb" src="https://cdn.amebaowndme.com/madrid-prd/madrid-web/images/sites/499076/d8b2bfab841ca481fb54c0c556a981e0_e53436c84ba2288eadf57bb2632218b0.jpg?width=600" alt="2024">
+        </div>
+        <div class="mp-body">
+            <div class="mp-year">2024</div>
+            <div class="mp-desc">2024年コレクション</div>
+            <span class="mp-link">→ 記事を読む</span>
+        </div>
+    </a>
+
+    <!-- 2023 -->
+    <a class="mp-card" href="https://escalade.amebaownd.com/posts/42026001">
+        <div class="mp-img-wrap">
+            <img class="mp-thumb" src="https://cdn.amebaowndme.com/madrid-prd/madrid-web/images/sites/499076/8ed6c93a645ba9dbc3780d688f7ea829_70552866f72ffaa9a17a9e04964cb3da.jpg?width=600" alt="2023">
+        </div>
+        <div class="mp-body">
+            <div class="mp-year">2023</div>
+            <div class="mp-desc">2023年コレクション</div>
+            <span class="mp-link">→ 記事を読む</span>
+        </div>
+    </a>
+</div>
+
+</body>
+</html>
