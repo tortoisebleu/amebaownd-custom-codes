@@ -1,99 +1,94 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ameba Ownd Custom Codes - Index</title>
-    <style>
-        body { 
-            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", sans-serif; 
-            line-height: 1.6; 
-            padding: 20px; 
-            max-width: 650px; /* 読みやすい黄金の幅 */
-            margin: 60px auto; /* 上下に余白を作り中央寄せ */
-            background-color: #f1f5f9; /* 背景色でカードを際立たせる */
-            color: #333; 
-        }
-        h1 {
-            font-size: 1.5rem;
-            color: #2c3e50;
-            border-bottom: 2px solid #6a9e94;
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        .category { 
-            background: white; 
-            padding: 20px; 
-            border-radius: 12px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin-bottom: 25px; 
-        }
-        .category h2 { 
-            margin-top: 0; 
-            font-size: 1.1rem; 
-            color: #6a9e94;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        ul { list-style: none; padding: 0; }
-        li { margin: 12px 0; }
-        a { 
-            text-decoration: none; 
-            color: #34495e; 
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        a:hover { color: #6a9e94; }
-        
-        /* 新着バッジのスタイル */
-        .badge-new {
-            background: #6a9e94;
-            color: white;
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 10px;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ameba Ownd カスタムコード集</title>
+  <style>
+    body { font-family: "Helvetica Neue", Arial, sans-serif; line-height: 1.6; padding: 20px; max-width: 650px; margin: auto; background-color: #f8f9fa; color: #333; }
+    h1 { text-align: center; color: #2c3e50; border-bottom: 3px solid #5a9a8a; padding-bottom: 10px; margin-bottom: 30px; }
+    .category { background: white; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); padding: 20px; margin-bottom: 25px; border: 1px solid #eef2f3; }
+    h2 { margin-top: 0; font-size: 1.1rem; color: #5a9a8a; display: flex; align-items: center; border-bottom: 1px solid #f1f1f1; padding-bottom: 10px; margin-bottom: 10px; }
+    h2::before { content: "●"; margin-right: 10px; font-size: 0.8em; }
+    ul { list-style: none; padding: 0; margin: 0; }
+    li { border-bottom: 1px solid #f1f1f1; display: flex; align-items: center; justify-content: space-between; }
+    li:last-child { border-bottom: none; }
+    a { flex-grow: 1; padding: 12px 10px; text-decoration: none; color: #34495e; transition: 0.2s; font-weight: 500; display: block; }
+    a:hover { background-color: #f0f7f5; color: #5a9a8a; padding-left: 15px; }
+    .badge { font-size: 0.75rem; padding: 2px 10px; border-radius: 12px; margin-left: 8px; font-weight: bold; white-space: nowrap; }
+    .bg-green { background: #e8f5e9; color: #2e7d32; }
+    .bg-blue { background: #e3f2fd; color: #1565c0; }
+    .bg-mix { background: #fff3e0; color: #ef6c00; }
+    .bg-red { background: #ffe4e1; color: #cd5c5c; }
+    .bg-yellow { background: #fffacd; color: #daa520; }
+    .bg-cyan { background: #e0f7fa; color: #00838f; }
+  </style>
 </head>
 <body>
 
-    <h1>Custom Codes Library</h1>
+  <h1>🎨 Ameba Ownd<br>Custom Codes</h1>
 
-    <!-- 1. Column Layouts (新しく追加) -->
-    <div class="category">
-        <h2>📂 Column Layouts</h2>
-        <ul>
-            <li>
-                <a href="column-layout/eco-bag-grid.html">Eco Bag Collections Grid</a>
-                <span class="badge-new">New</span>
-            </li>
-        </ul>
-    </div>
+  <!-- レイアウト -->
+  <div class="category">
+    <h2>レイアウト (Column Layouts)</h2>
+    <ul>
+      <li><a href="column-layout/green.html">🟢 緑バージョン</a><span class="badge bg-green">基本形</span></li>
+      <li><a href="column-layout/blue.html">🔵 青バージョン</a><span class="badge bg-blue">爽やか</span></li>
+      <li><a href="column-layout/mix-side-by-side.html">🔵🟢 混合（横並び）</a><span class="badge bg-mix">PC推奨</span></li>
+      <li><a href="column-layout/mix-stacked.html">🔵🟢 混合（縦積み）</a><span class="badge bg-mix">スマホ最適</span></li>
+    </ul>
+  </div>
 
-    <!-- 2. Maps & Indexes -->
-    <div class="category">
-        <h2>🗺️ Maps & Indexes</h2>
-        <ul>
-            <li><a href="france-climbing-map.html">France Climbing Map</a></li>
-            <li><a href="europe-climbing-index.html">Europe Climbing Index</a></li>
-        </ul>
-    </div>
+  <!-- チャット -->
+  <div class="category">
+    <h2>チャットバブル (Chat Bubbles)</h2>
+    <ul>
+      <li><a href="chat/male.html">👱🏻‍♂️ 男性バージョン</a><span class="badge bg-blue">Blue Chat</span></li>
+      <li><a href="chat/female.html">👱🏻‍♀️ 女性バージョン</a><span class="badge bg-green">Pink Chat</span></li>
+      <li><a href="chat/thinking.html">💭 考えごと吹き出し</a><span class="badge bg-mix">ポヨンと動く</span></li>
+    </ul>
+  </div>
 
-    <!-- 3. Tools -->
-    <div class="category">
-        <h2>🛠️ Practical Tools</h2>
-        <ul>
-            <li><a href="grade-converter.html">Climbing Grade Converter</a></li>
-        </ul>
-    </div>
+  <!-- スライドショー -->
+  <div class="category">
+    <h2>スライドショー (Slideshows)</h2>
+    <ul>
+      <li><a href="slideshow/fast-slide-18s.html">🎞️ 早送りスライド (18秒)</a><span class="badge bg-blue">Quick</span></li>
+      <li><a href="slideshow/cross-dissolve-40s.html">🎬 クロスディゾルブ (40秒)</a><span class="badge bg-green">Smooth</span></li>
+    </ul>
+  </div>
 
-    <footer style="text-align: center; margin-top: 40px; font-size: 0.8rem; color: #95a5a6;">
-        &copy; 2026 tortoisebleu.github.io
-    </footer>
+  <!-- テーブル -->
+  <div class="category">
+    <h2>テーブル (Tables)</h2>
+    <ul>
+      <li><a href="table/performance.html">📊 成績表</a><span class="badge bg-blue">Speed Climbing</span></li>
+      <li><a href="table/france-areas.html">🇫🇷 フランスエリアガイド</a><span class="badge bg-green">Link List</span></li>
+    </ul>
+  </div>
+
+  <!-- プロフィール -->
+  <div class="category">
+    <h2>プロフィール (Profiles / Maps)</h2>
+    <ul>
+      <li><a href="profile/france-climbing-map.html">📍 フランスの岩場マップ</a><span class="badge bg-red">Interactive</span></li>
+      <li><a href="profile/style-bar-jp.html">📊 クライミングスタイル (JP)</a><span class="badge bg-blue">日本語</span></li>
+      <li><a href="profile/style-bar-fr.html">📊 Style de grimpe (FR)</a><span class="badge bg-green">Français</span></li>
+     <li><a href="profile/europe-climbing-index.html">🏷️ 欧州エリア索引</a><span class="badge bg-cyan">Tags</span></li>
+    </ul>
+  </div>
+
+  <!-- ツール -->
+  <div class="category">
+    <h2>ツール (Climbing Tools)</h2>
+    <ul>
+      <li><a href="tool/climbing-grade-converter.html">🧗 グレード変換ツール</a><span class="badge bg-green">Converter</span></li>
+    </ul>
+  </div>
+
+  <footer style="text-align: center; font-size: 0.8rem; color: #95a5a6; margin-top: 40px; padding-bottom: 20px;">
+    &copy; tortoisebleu | GitHub Pages Project
+  </footer>
 
 </body>
 </html>
